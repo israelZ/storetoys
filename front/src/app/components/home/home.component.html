@@ -1,0 +1,299 @@
+<!-- <mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle (click)="login()">Login</mat-button-toggle>
+        <mat-button-toggle (click)="singin()">Singin</mat-button-toggle>
+        <mat-button-toggle >Gmail don't work</mat-button-toggle>
+        <mat-button-toggle >Vsitor</mat-button-toggle>
+      </mat-button-toggle-group>
+    <span class="spacer"></span>
+
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+  </mat-toolbar-row>
+</mat-toolbar> -->
+
+<ul class="nav justify-content-center mt-4">
+  <li class="nav-item">
+      <button type="button" class="btn btn-outline-danger"  data-toggle="modal" data-target="#Singup">Sing up</button>
+  </li>
+  <li class="nav-item">
+      <button type="button" class="btn btn-outline-light btn_nav" data-toggle="modal" data-target="#Singin">Sing in</button>
+  </li>
+  <li class="nav-item">
+      <button type="button" class="btn btn-outline-success">Visitor</button>
+  </li>
+</ul>
+
+
+
+  <div class="stortext">
+      <svg viewBox="0 0 960 300">
+          <symbol id="s-text">
+            <text class="text-break" text-anchor="middle" x="50%" y="80%">Store-Toys</text>
+          </symbol>
+        
+          <g class = "g-ants">
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+          </g>
+        </svg>
+    
+  
+
+  </div>
+
+
+
+
+<button (click)="admin()">admin</button>
+<button (click)="worker()">worker</button>
+<button (click)="client()">client</button>
+
+<!-- Modal Singup -->
+<div class="modal fade" id="Singup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Sing Up</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        
+        <div class="modal-body">
+           
+          <form name="userSingUp" [formGroup]="userSingUp">
+                
+              <div class="form-row">
+                <!-- firs name -->
+                  <div class="col">
+                      <label for="firstName">First name</label>
+                    <input type="text" class="form-control" placeholder="First name"
+                    formControlName= "name" [ngClass]="{'is-invalid':userSingUp.get('name').touched && userSingUp.get('name').invalid }" required />
+                    <div class="invalid-feedback">
+                        <div>First Name is required</div>
+                      </div>
+                    </div>
+
+                  <!-- lest name -->
+                  <div class="col">
+                      <label for="family">Last name</label>
+                    <input type="text" class="form-control" id="family" placeholder="Last name"
+                    formControlName= "family" [ngClass]="{'is-invalid':userSingUp.get('family').touched && userSingUp.get('family').invalid}" required>
+                    <div class="invalid-feedback">
+                        <div>Lest Name is required</div>
+                      </div>
+                  </div>
+                </div>
+                  <!-- email -->
+                    <div class="form-row mt-1">
+                      <div class="form-group col-md-6">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="Email"
+                        formControlName= "email" [ngClass]="{'is-invalid':userSingUp.get('email').touched && userSingUp.get('email').invalid} " required>
+                        
+                        <div *ngIf="userSingUp.get('email').touched && userSingUp.get('email').invalid"  class="invalid-feedback">
+                            <div *ngIf="userSingUp.get('email').errors.required">Email is required</div>
+                            <div *ngIf="userSingUp.get('email').errors.email">Email must be a valid email Address</div>
+                          </div>
+                      </div>
+
+                      <!-- password -->
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password"
+                        formControlName= "password" [ngClass]="{'is-invalid':userSingUp.get('password').touched && userSingUp.get('password').invalid}" required>
+                        <div *ngIf="userSingUp.get('password').touched && userSingUp.get('password').invalid"  class="invalid-feedback">
+                            <div *ngIf="userSingUp.get('password').errors.required">Password is required</div>
+                            <div *ngIf="userSingUp.get('password').errors.minlength">Password  must be a letaset 6 charector</div>
+                          </div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <!-- address -->
+                      <label for="inputAddress">Address</label>
+                      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
+                      formControlName= "address" [ngClass]="{'is-invalid':userSingUp.get('address').touched && userSingUp.get('address').invalid}" required>
+                      <div class="invalid-feedback">
+                          <div>Address is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <!-- city -->
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" id="inputCity"
+                        formControlName= "city" [ngClass]="{'is-invalid':userSingUp.get('city').touched && userSingUp.get('city').invalid}" required>
+                        <div class="invalid-feedback">
+                            <div>City is required</div>
+                          </div>
+                      </div>
+                   
+                      <!-- Country -->
+                      <div class="form-group col-md-6">
+                        <label for="inputCountry">Country</label>
+                        <input type="text" class="form-control" id="inputCountry"
+                        formControlName= "country" [ngClass]="{'is-invalid':userSingUp.get('country').touched && userSingUp.get('country').invalid}" required>
+                        <div class="invalid-feedback">
+                            <div>Country is required</div>
+                          </div>
+                      </div>
+                   
+                    </div>
+
+
+                    <div class="form-row">
+                      <!-- phone -->
+                        <div class="form-group col-md-6">
+
+                             <label for="inputPhone">Phone</label>
+                          <input  type="text" class="form-control" id="inputPhone" placeholder="Phone"
+                          formControlName= "phone" [ngClass]="{'is-invalid':userSingUp.get('phone').touched && userSingUp.get('phone').invalid}" required>
+                          <div *ngIf="userSingUp.get('phone').touched && userSingUp.get('phone').invalid"  class="invalid-feedback">
+                              <div *ngIf="userSingUp.get('phone').errors.required">Password is required</div>
+                              <div *ngIf="userSingUp.get('phone').errors.minlength">phone  must be a letaset 9 charector</div>
+                              <div *ngIf="userSingUp.get('phone').errors.pattern">phone  must be a namber</div>
+                            </div>
+
+                            
+                          </div>
+
+                      <!-- gender -->
+                      <div class="form-group col-md-6">
+                          <label for="inputGender">Gender</label>
+                      <fieldset id="inputGender">
+                      
+                        <div class="col-sm-10">
+                              <div class="form-check col-6">
+                                <input class="form-check-input" type="radio" name="gender"   value="male" checked>
+                                <label class="form-check-label" for="id_male">
+                                    Male
+                                </label>
+                              </div>
+                              
+                              <div class="form-check col-6">
+                                <input class="form-check-input" type="radio" name="gender"  value="female" required>
+                                <label class="form-check-label" for="id_female">
+                                    Female
+                                </label>
+                              </div>
+                            </div>
+                        </fieldset>
+                      </div>
+                      </div>
+                    
+                      <div class="row">
+                          <div class="col-sm-12">
+                             <div id="valid" class="alert alert-success show fade ">
+                                <div class="alert-heading"> One of the fields is incorrect</div>
+                             </div>
+                         </div>
+                        </div>
+              </form>
+            </div>
+        <div class="modal-footer">
+            <button (click)="SingUp()" class="btn btn-primary center example-popover">Sign Up</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  
+<!-- end SingUp -->
+
+<!-- Model from Singin -->
+<div class="modal fade" id="Singin" tabindex="-1" role="dialog" 
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Sing In</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            
+            <form name="userSingIn" [formGroup]="userSingIn">
+            <!-- name -->
+            <div class="input-group flex-nowrap ">
+             
+              
+                <div class="input-group-prepend ">
+                  <span class="input-group-text" id="addon-wrapping">
+                    <i class="material-icons">perm_identity</i></span>
+                  </div> 
+                  <input type="text" class="form-control" placeholder="Username" 
+                  formControlName= "name" [ngClass]="{'is-invalid':userSingIn.get('name').touched && userSingIn.get('name').invalid }" required/>
+                
+
+                  <div class="invalid-feedback col-4">
+                    <div> Name is required</div>
+                  </div>
+                
+              </div>
+                  
+            
+                  
+                          
+              <!-- password -->
+              <div class="input-group flex-nowrap pt-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="addon-wrapping">
+                    <i class="material-icons">more_horiz</i>
+                  </span>
+                </div>
+                <input type="password" class="form-control"  placeholder="Password"
+                        formControlName= "password" [ngClass]="{'is-invalid':userSingIn.get('password').touched && userSingIn.get('password').invalid}" required>
+                        <div *ngIf="userSingIn.get('password').touched && userSingIn.get('password').invalid"  class="invalid-feedback col-4">
+                            <div *ngIf="userSingIn.get('password').errors.required">Password is required</div>
+                            <div *ngIf="userSingIn.get('password').errors.minlength">Password  must be a letaset 6 charector</div>
+                          </div>
+              </div>
+            </form>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" (click)="SingIn()" class="btn btn-primary">Sign In</button>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+<!-- end Model SingIn -->
+
+
+
+
+
+
+
+<div id="carouselExampleFade" class="bg carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+      
+      <div class="carousel-item" data-interval="5000">
+        <img src="./assets/1.jpg" class="img-fluid d-block w-100" alt="...">
+      </div>
+      
+      <div class="carousel-item" data-interval="5000" >
+        <img src="./assets/2.jpg" class="img-fluid d-block w-100" alt="...">
+      </div>
+     
+      <div class="carousel-item active" data-interval="5000">
+        <img src="./assets/3.jpg" class="img-fluid" alt="...">
+      </div>
+    
+    </div>
+   
+  </div>
+

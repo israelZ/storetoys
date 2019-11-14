@@ -1,0 +1,25 @@
+<ul>
+  <li *ngFor="let order of listOrder; let i = index">
+        <ul>
+          <div class="row">
+            
+            <div class="col s12 m5">
+              <div class="card-panel teal">
+                <span class="white-text">
+                  <li *ngFor="let item of order.items; let i = index">
+                          <h6>{{item.item.name}}</h6>
+                          <p>{{item.item.price}} x {{item.qut}}={{item.item.price * item.qut}} </p>
+                  </li>
+                </span>
+                </div>
+              </div>
+          </div>
+        </ul>    
+  </li>
+</ul>
+
+  
+
+
+
+

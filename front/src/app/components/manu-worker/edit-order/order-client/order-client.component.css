@@ -1,0 +1,18 @@
+.accepted{
+    background-color: #ffab91
+}
+.handling{
+    background-color: #fff59d
+}
+.sent{
+    background-color: #a5d6a7
+}
+
+
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }

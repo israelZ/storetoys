@@ -1,0 +1,36 @@
+
+<div class='row'>
+
+  <div class='col-6 '>
+    <div *ngFor="let order of listOrderByClient; let i = index" >
+      
+      <mat-card  [ngClass]="{accepted: order.status == 1, handling: order.status == 2 , sent: order.status == 3}" class="example-card  mb-2" >
+        <mat-card-header >
+          <mat-card-title>Order</mat-card-title>
+          <mat-card-subtitle>Deta: {{order.date.substring(0,10)}}</mat-card-subtitle>
+        </mat-card-header>
+        
+        <mat-card-content>
+          <p *ngFor="let item of order.items; let i = index">
+            {{item.item.name}}   {{item.item.price}} x {{item.qut}}={{item.item.price * item.qut}}
+          </p>
+        </mat-card-content>
+        
+        <mat-card-actions>
+          <button mat-button [routerLink]="[order._id]">Upaete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  
+  <div class='col-6'>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+  
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,58 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle [routerLink]="['editorder']" ><i class="material-icons">notes</i>ORDER</mat-button-toggle>
+        <mat-button-toggle [routerLink]="['items']"><i class="material-icons">local_play</i>ITEM</mat-button-toggle>
+        <mat-button-toggle [routerLink]="['users']"><i class="material-icons">supervised_user_circle</i>USERS</mat-button-toggle>
+        <mat-button-toggle (click)="logout()">Logout</mat-button-toggle>
+      </mat-button-toggle-group>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+
+    
+<!-- <div class="container-fluid h-100 m-0"> -->
+       
+        <!-- <div class="row"> -->
+                <div class='col-1 fill h-100' >
+                    israel
+                <!-- </div> -->
+                          </div>     
+
+<!-- </div> -->
+            
+      
+        
+
+<!-- <div class="container-fluid">
+   
+    <div class="row">
+        <div class="col sm-2">
+            <div style="margin-top:19px;" class="pull-right"> 
+                <button type="button" class="btn btn-primary" (click)="join()">Join</button>
+                <button type="button" class="btn btn-default" (click)="leave()">Leave</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="well" style="height:200px; padding:15px;">
+            <div *ngFor="let item of messageArray">
+            <span><strong>{{item.user}} : </strong> {{item.message}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
+            <input type="text" class="form-control" [(ngModel)]="messageText">            
+        </div>
+        <div class="col-sm-2">
+                <button type="button" class="btn btn-success pull-right" (click)="sendMessage()">Send</button>
+        </div>
+    </div>
+</!--> -->
+
+
+<img class="bg img-fluid" src="./assets/Background-20.jpeg">
+  <router-outlet></router-outlet>

@@ -1,0 +1,44 @@
+<div class='container-fluid'>
+  <div class="row">
+
+  <div class="collection">
+    <div *ngFor="let items of listBuy; let i = index" class="collection-item" >
+      
+      <p>{{items.item.price}} x {{items.qut}}={{items.item.price * items.qut}} </p>
+      <button (click)="delet(items.item._id)" class='btn btn-primary'>Delet</button>  
+      <button (click)="plus(items.item._id)" class='btn btn-primary'>+</button>  
+      <button (click)="minus(items.item._id)" class='btn btn-primary'>-</button>  
+    </div>
+  </div>
+</div>
+<div class="row">
+  <h5>Total Order: {{totalPrice}}</h5>
+</div>
+
+
+
+
+
+
+    <!-- <ul>
+      <li *ngFor="let items of listBuy; let i = index">
+        
+        <div class="card">
+          <div class="card-body">
+            {{i}}          
+            <div class="image">
+              <img src={{items.item.url}} alt="" style="position: relative; width: 100%;" />
+              <h2>{{items.item.name}} 
+                <br />{{items.item.price}}</h2>
+                <h2>{{items.item.price}} x {{items.qut}}={{items.item.price * items.qut}} </h2>
+                <button (click)="delet(items.item._id)" class='btn btn-primary'>Delet</button>  
+                <button (click)="plus(items.item._id)" class='btn btn-primary'>+</button>  
+                <button (click)="minus(items.item._id)" class='btn btn-primary'>-</button>  
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div> -->
+      <button (click)="orderBuy()" class='btn btn-primary'>Buy</button>  

@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+      <mat-toolbar-row>
+  
+          <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle [routerLink]="['edit_order']" ><i class="material-icons">notes</i>Order</mat-button-toggle>
+          <mat-button-toggle [routerLink]="['edit_items']"><i class="material-icons">local_play</i>Items</mat-button-toggle>
+        </mat-button-toggle-group>
+      <span class="spacer"></span>
+
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
+      <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+<img class="bg img-fluid" src="./assets/osxwallaper.jpg">
+    
+  <router-outlet></router-outlet>
+        
+  

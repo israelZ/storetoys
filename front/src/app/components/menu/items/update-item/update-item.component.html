@@ -1,0 +1,66 @@
+<!--  -->
+  <div class="row justify-content-center" >
+    <div class="col-12">
+
+      <!-- <img src="{{img}}" id="imgUp"> -->
+      <img src="{{img}}" id="imgUp" class="img-fluid" alt="Responsive image">
+      <input type="file" id="file-upload" (change)="changeImage($event)">
+    </div>
+    
+    <div class="col">
+
+      <button mat-fab color="primary">  
+        <label for="file-upload" ><i class="material-icons">note_add</i></label>
+      </button>
+    </div>
+      
+    
+    </div>
+
+<!--  -->
+    <div class='row mt-3'>
+
+      <div class="col-lg-6 ">
+        <mat-form-field appearance="outline">
+          <mat-label>Name of Item</mat-label>
+          <input [(ngModel)]="item.name"  name="item.name" matInput placeholder="Name">
+          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+      </div>
+
+
+
+      <div class='col-lg-6'>
+      
+          <mat-form-field appearance="outline">
+            <mat-label>Quantity of Item</mat-label>
+            <input type="number" matInput placeholder="Quantity" [(ngModel)]="item.quantity" name="item.quantity">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+        </div>
+      
+        <div  class='col-lg-6'>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Price of Item</mat-label>
+            <input type="number" matInput placeholder="Price" [(ngModel)]="item.price" name="item.price">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+      </div>
+
+      <div class='col-lg-6'>
+          <mat-form-field>
+                      <mat-label>Category</mat-label>
+                      <mat-select>
+                        <mat-option *ngFor="let ctg of category" [value]="ctg">
+                          {{ctg}}
+                        </mat-option>
+                      </mat-select>
+        </mat-form-field>
+      </div>
+
+    <button (click)="updateItem()" type="button" class="btn btn-dark">Update</button> 
+
+  </div>
+
+
