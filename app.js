@@ -102,6 +102,7 @@ app.post('/singin',(req,res)=>
   {
     //seve session of user
     req.session.user=result;
+    console.log(result)
     
     res.send(result);
   }).catch(err=>console.log(err))
