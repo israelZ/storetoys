@@ -120,7 +120,7 @@ get FirstName(){
   {
     
     // set now date from Singup & gender
-    this.setDate()
+    this.setDateSingup()
     this.userSingUp.patchValue({gender : $('input[name=gender]:checked').val()});
   
 
