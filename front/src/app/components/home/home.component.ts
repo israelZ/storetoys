@@ -21,19 +21,12 @@ import * as $ from 'jquery';
 export class HomeComponent implements OnInit {
 
   
- 
-
-
-  flagSing:boolean;
-  flagLog:boolean;
-  unsign:boolean;
-  headerToggle = new BehaviorSubject<any>(null);
-
-
-
-
   
+  FlagMeseegEnter:boolean;
+  NameUserForMesseg:String;
+  Messeg:String;
   
+
   //value input sign in
   userSingIn = new FormGroup({
     name:new FormControl('', Validators.required),
@@ -54,11 +47,11 @@ userSingUp = new FormGroup({
   phone:new FormControl('', [Validators.required,Validators.minLength(9),Validators.pattern('[0-9]*')])
  });
 
+//  geteer to fromGroup
  get firstName(){
   return this.userSingUp.get('firstName')
 }
-
-get Name(){
+get FirstName(){
   return this.userSingIn.get('Name')
 }
 
@@ -66,58 +59,161 @@ get Name(){
   constructor(public eventService:EventService, private renderer: Renderer2,public serchService:SerchService,public router:Router) 
     {
       
-
-    // this.serchService.getLogin()
-    // .subscribe((res: any) =>
-    // { 
-    //   if(res.loggedIn)
-    //   {this.parsLogin(res.loggedIn)}
-       
-    // })
-   }
-
+      this.FlagMeseegEnter=false;
+      // this.serchService.getLogin()
+      // .subscribe((res: any) =>
+      // { 
+        //   if(res.loggedIn)
+        //   {this.parsLogin(res.loggedIn)}
+        
+        // })
+      
+      
+      
+      }
+      
+    
   ngOnInit() {
-
+    
     $('#valid').addClass('invisible');
-
+    
+    
+    // close model singup
+    var resetInputUserUp=this.userSingUp
     $('#Singup').on('hidden.bs.modal', function (e) {
+     
+      // hiden alert 
       $('#valid').addClass('invisible');
-      this.userSingUp.reset();
+
+      
+      // hiden valid input
+      $('#inputName').removeClass('is-invalid');
+      $('#inputFamily').removeClass('is-invalid');
+      $('#inputPassword').removeClass('is-invalid');
+      $('#inputEmail').removeClass('is-invalid');
+      $('#inputAddress').removeClass('is-invalid');
+      $('#inputCity').removeClass('is-invalid');
+      $('#inputCountry').removeClass('is-invalid');
+      $('#inputPhone').removeClass('is-invalid');
+
+  
+      // remove input&error
+      resetInputUserUp.reset();
+      
     })
+
+    // close model singin
+    var resetInputUserIn=this.userSingIn
+    $('#Singin').on('hidden.bs.modal', function (e){
+
+       // hiden valid input
+      $('#inputUserIn').removeClass('is-invalid');
+      $('#inputPasswordIn').removeClass('is-invalid');
+
+      // remove input&error
+      resetInputUserIn.reset();
+    })
+    
   }
 
   SingUp()
   {
+    
     // set now date from Singup & gender
+    this.setDate()
+    this.userSingUp.patchValue({gender : $('input[name=gender]:checked').val()});
+  
+
+
+    // test if valid input of Singup 
+    if (this.userSingUp.valid)
+    {
+      
+      this.serchService.postSingUp(this.userSingUp.value).subscribe(data=>{
+        if(data!={})
+        {
+          // set username and hide model
+          this.NameUserForMesseg=this.userSingUp.value.name
+          $('#Singup').modal('hide')
+         
+           // show messege Hello
+          this.Messeg="Thanks for signing up You will immediately go to the store Fun shopping !!"
+          this.FlagMeseegEnter=true;
+
+           // go to console from user
+          setTimeout(()=>this.parsLogin(data),3000)
+        }
+      });
+    } 
+    else
+    $('#btnSingUp').popover('show')
+
+    // hide tooltipe in btn
+    setTimeout(()=>{ $('#btnSingUp').popover('hide'); }, 3000)
+
+  }
+
+  
+  SingIn()
+  {
+
+    // test if valid input of Singin 
+    if (this.userSingIn.valid)
+    {
+      this.serchService.postSingIn(this.userSingIn.value).subscribe(
+        UserReturn=>{
+
+          // set username and hide model
+          this.NameUserForMesseg=this.userSingIn.value.name;
+          $('#Singin').modal('hide')
+         
+          // show messege Hello
+          this.FlagMeseegEnter=true;
+          this.Messeg="Welcome to the store"
+         
+          // go to console from menger/worker/user
+          setTimeout(()=>this.parsLogin(UserReturn),3000)
+          
+        },
+        err=>{
+              //  show poppovers element
+              $('#btnSingIn').attr('data-content',err.error)
+              $('#btnSingIn').popover('show')
+              //  hide poppovers element
+              setTimeout(()=>{ $('#btnSingIn').popover('dispose'); }, 3000)        
+            },
+        ()=>{}
+        )
+    }
+   else
+   {
+    //   //  showe&hide poppovers element
+     $('#btnSingIn').attr('data-content',"Invalid user or password")
+     $('#btnSingIn').popover('show')
+    
+     setTimeout(()=>{ $('#btnSingIn').popover('dispose'); }, 3000)
+    }
+  }
+
+
+
+  setDateSingup(){
+
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-     
     this.userSingUp.patchValue({date : mm + '/' + dd + '/' + yyyy});
-    this.userSingUp.patchValue({gender : $('input[name=gender]:checked').val()});
-  
-    if (this.userSingUp.valid) 
-    this.serchService.postSingUp(this.userSingUp).subscribe(data=>console.log(data));
-    else
-    $('#valid').removeClass('invisible');
-  
   }
 
-  
-  
-  
- 
-  SingIn()
-  {
-    this.serchService.postSingIn(this.userSingIn).subscribe(data=>this.parsLogin(data))
-  }
 
+
+  // go to console of type permission
   parsLogin(data)
   { 
    
      this.eventService.addUser(data);
-      switch (data[0].type) {
+      switch (data.type) {
         case 'meneger':
         this.router.navigate(['menu'])  
           break;
@@ -136,10 +232,10 @@ get Name(){
 
  admin()
  {
-  this.userSingIn.setValue({name:'dani',password:'12346'})
+  this.userSingIn.setValue({name:'dani',password:'123456'})
   // this.userSingIn.password='12346'
   
-  this.serchService.postSingIn(this.userSingIn).subscribe(data=>this.parsLogin(data))
+  this.serchService.postSingIn(this.userSingIn.value).subscribe(data=>this.parsLogin(data))
  }
 
  worker()

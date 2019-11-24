@@ -23,9 +23,10 @@ export class SerchService {
     return  this.http.post('/singin',user,{withCredentials: true});
   }
 
-  postSingUp(user)
+  postSingUp(userUp)
   {
-    return  this.http.post('/singup',user);
+    
+      return  this.http.post('/singup',userUp);
   }
 
 

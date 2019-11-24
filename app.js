@@ -83,13 +83,16 @@ app.post('/singup',(req,res)=>
     password:req.body.password,    
     email:req.body.email,
     city :req.body.city,
-    address:req.body.city,
+    address:req.body.address,
     gender:req.body.gender,
     phone:req.body.phone,
     country:req.body.country,
     date:req.body.date,
     active:true
   }
+
+  // seve session of user
+  req.session.user=result;  
 
   new users(user).save().then(data=> res.send(user)).catch(error=>res.send(error))
 })
@@ -100,13 +103,19 @@ app.post('/singin',(req,res)=>
 
   mongoose.model('users').find({name:req.body.name,password:req.body.password},(err,result)=>
   {
-    //seve session of user
-    req.session.user=result;
-    console.log(result)
-    
-    res.send(result);
-  }).catch(err=>console.log(err))
+    if(result.length==1)
+    {  
+      // seve session of user
+      req.session.user=result;  
+      res.send(result[0])
+    }
+    else
+    {
+      res.status(500).send("The user or password is incorrect") 
+    }
+  }).catch(()=>res.status(500).send("error occured"))
 })
+
 
 app.get('/logged_in',(req,res)=>
 {   

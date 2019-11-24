@@ -1,18 +1,4 @@
-<!-- <mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <mat-button-toggle-group appearance="legacy" name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle (click)="login()">Login</mat-button-toggle>
-        <mat-button-toggle (click)="singin()">Singin</mat-button-toggle>
-        <mat-button-toggle >Gmail don't work</mat-button-toggle>
-        <mat-button-toggle >Vsitor</mat-button-toggle>
-      </mat-button-toggle-group>
-    <span class="spacer"></span>
-
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example heart icon">favorite</mat-icon>
-    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example delete icon">delete</mat-icon>
-  </mat-toolbar-row>
-</mat-toolbar> -->
-
+<!-- Manu -->
 <ul class="nav justify-content-center mt-4">
   <li class="nav-item">
       <button type="button" class="btn btn-outline-danger"  data-toggle="modal" data-target="#Singup">Sing up</button>
@@ -26,13 +12,12 @@
 </ul>
 
 
-
+<!-- taxt StoreToys -->
   <div class="stortext">
       <svg viewBox="0 0 960 300">
           <symbol id="s-text">
             <text class="text-break" text-anchor="middle" x="50%" y="80%">Store-Toys</text>
           </symbol>
-        
           <g class = "g-ants">
             <use xlink:href="#s-text" class="text-copy"></use>
             <use xlink:href="#s-text" class="text-copy"></use>
@@ -41,17 +26,14 @@
             <use xlink:href="#s-text" class="text-copy"></use>
           </g>
         </svg>
-    
-  
-
   </div>
 
 
 
 
-<button (click)="admin()">admin</button>
+<!-- <button (click)="admin()">admin</button>
 <button (click)="worker()">worker</button>
-<button (click)="client()">client</button>
+<button (click)="client()">client</button> -->
 
 <!-- Modal Singup -->
 <div class="modal fade" id="Singup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -67,13 +49,13 @@
         
         <div class="modal-body">
            
-          <form name="userSingUp" [formGroup]="userSingUp">
+          <form id="from" #formDirective="ngForm"  [formGroup]="userSingUp">
                 
               <div class="form-row">
                 <!-- firs name -->
                   <div class="col">
                       <label for="firstName">First name</label>
-                    <input type="text" class="form-control" placeholder="First name"
+                    <input type="text" class="form-control" id="inputName" placeholder="First name"
                     formControlName= "name" [ngClass]="{'is-invalid':userSingUp.get('name').touched && userSingUp.get('name').invalid }" required />
                     <div class="invalid-feedback">
                         <div>First Name is required</div>
@@ -83,7 +65,7 @@
                   <!-- lest name -->
                   <div class="col">
                       <label for="family">Last name</label>
-                    <input type="text" class="form-control" id="family" placeholder="Last name"
+                    <input type="text" class="form-control" id="inputFamily" placeholder="Last name"
                     formControlName= "family" [ngClass]="{'is-invalid':userSingUp.get('family').touched && userSingUp.get('family').invalid}" required>
                     <div class="invalid-feedback">
                         <div>Lest Name is required</div>
@@ -96,7 +78,6 @@
                         <label for="inputEmail">Email</label>
                         <input type="email" class="form-control" id="inputEmail" placeholder="Email"
                         formControlName= "email" [ngClass]="{'is-invalid':userSingUp.get('email').touched && userSingUp.get('email').invalid} " required>
-                        
                         <div *ngIf="userSingUp.get('email').touched && userSingUp.get('email').invalid"  class="invalid-feedback">
                             <div *ngIf="userSingUp.get('email').errors.required">Email is required</div>
                             <div *ngIf="userSingUp.get('email').errors.email">Email must be a valid email Address</div>
@@ -189,24 +170,17 @@
                         </fieldset>
                       </div>
                       </div>
-                    
-                      <div class="row">
-                          <div class="col-sm-12">
-                             <div id="valid" class="alert alert-success show fade ">
-                                <div class="alert-heading"> One of the fields is incorrect</div>
-                             </div>
-                         </div>
-                        </div>
               </form>
             </div>
         <div class="modal-footer">
-            <button (click)="SingUp()" class="btn btn-primary center example-popover">Sign Up</button>
+            <button type="button" class="btn btn-lg btn-warning" data-toggle="hover" title="error valid" id="btnSingUp"
+            data-content="One or more fields are incorrect" (click)="SingUp()" >Sing Up</button>
         </div>
       </div>
     </div>
     </div>
-  
 <!-- end SingUp -->
+
 
 <!-- Model from Singin -->
 <div class="modal fade" id="Singin" tabindex="-1" role="dialog" 
@@ -224,27 +198,20 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-body">
             
             <form name="userSingIn" [formGroup]="userSingIn">
-            <!-- name -->
+           
+              <!-- name -->
             <div class="input-group flex-nowrap ">
-             
-              
-                <div class="input-group-prepend ">
+              <div class="input-group-prepend ">
                   <span class="input-group-text" id="addon-wrapping">
                     <i class="material-icons">perm_identity</i></span>
                   </div> 
-                  <input type="text" class="form-control" placeholder="Username" 
+                  <input type="text" class="form-control" placeholder="Username" id="inputUserIn" 
                   formControlName= "name" [ngClass]="{'is-invalid':userSingIn.get('name').touched && userSingIn.get('name').invalid }" required/>
-                
-
                   <div class="invalid-feedback col-4">
                     <div> Name is required</div>
-                  </div>
-                
-              </div>
+                  </div>   
+            </div>
                   
-            
-                  
-                          
               <!-- password -->
               <div class="input-group flex-nowrap pt-3">
                 <div class="input-group-prepend">
@@ -252,7 +219,7 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <i class="material-icons">more_horiz</i>
                   </span>
                 </div>
-                <input type="password" class="form-control"  placeholder="Password"
+                <input type="password" class="form-control"  placeholder="Password" id="inputPasswordIn"
                         formControlName= "password" [ngClass]="{'is-invalid':userSingIn.get('password').touched && userSingIn.get('password').invalid}" required>
                         <div *ngIf="userSingIn.get('password').touched && userSingIn.get('password').invalid"  class="invalid-feedback col-4">
                             <div *ngIf="userSingIn.get('password').errors.required">Password is required</div>
@@ -264,7 +231,8 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         </div>
 
         <div class="modal-footer">
-          <button type="button" (click)="SingIn()" class="btn btn-primary">Sign In</button>
+            <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="error valid" id="btnSingIn"
+             (click)="SingIn()" >Sing in</button>
         </div>
       
       </div>
@@ -273,11 +241,19 @@ aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <!-- end Model SingIn -->
 
 
+  <div class="jumbotron offset-4 col-4" *ngIf="FlagMeseegEnter">
+    <h1 class="display-4">Hello {{NameUserForMesseg}}</h1>
+    <hr class="my-4">
+    <p>{{Messeg}}</p>
+      <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    
 
+    
 
-
-
-
+<!-- image backgrond -->
 <div id="carouselExampleFade" class="bg carousel slide carousel-fade" data-ride="carousel">
     <div class="carousel-inner">
       
